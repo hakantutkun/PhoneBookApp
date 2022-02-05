@@ -1,6 +1,4 @@
-﻿using ContactService.Core.Models;
-
-namespace PersonService.Core.Models
+﻿namespace PersonService.Core.Models
 {
     /// <summary>
     /// Person Model

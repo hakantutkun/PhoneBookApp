@@ -1,12 +1,15 @@
-﻿using PersonService.Core.Models;
-
-namespace ContactService.Core.Models
+﻿namespace PersonService.Core.Models
 {
     /// <summary>
     /// Contact Info Model
     /// </summary>
     public class ContactInfo
     {
+        /// <summary>
+        /// Id of the info
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// Phone Number of contact
         /// </summary>
@@ -25,7 +28,7 @@ namespace ContactService.Core.Models
         /// <summary>
         /// Person Id Information
         /// </summary>
-        public int PersonId { get; set; }
+        public string? PersonId { get; set; }
 
         /// <summary>
         /// Person Information
