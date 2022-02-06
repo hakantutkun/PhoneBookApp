@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddHttpClient<IPersonAPIService, PersonAPIManager>();
+builder.Services.AddHttpClient<IReportAPIService, ReportAPIManager>();
 
 var app = builder.Build();
 
