@@ -215,6 +215,23 @@ namespace ContactService.API.Controllers
         }
 
         /// <summary>
+        /// Creates requested contact info.
+        /// </summary>
+        /// <param name="infoId">Requested info id.</param>
+        [HttpPost("Info/")]
+        public async Task<IActionResult> CreateInfoAsync(ContactInfo contactInfo)
+        {
+            // add contact info
+            await _context.ContactInfos.AddAsync(contactInfo);
+
+            // Save Changes
+            await _context.SaveChangesAsync();
+
+            // Return created person
+            return Created("", contactInfo);
+        }
+
+        /// <summary>
         /// Deletes requested contact info.
         /// </summary>
         /// <param name="infoId">Requested info id.</param>

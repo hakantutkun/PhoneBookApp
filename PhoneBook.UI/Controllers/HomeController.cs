@@ -132,6 +132,29 @@ namespace PhoneBook.UI.Controllers
         }
 
         /// <summary>
+        /// Detail page get method
+        /// </summary>
+        public async Task<IActionResult> CreateInfo(string id)
+        {
+            ViewData["personId"] = id;
+            return View();
+        }
+
+        /// <summary>
+        /// Creates contact info
+        /// </summary>
+        /// <param name="contactInfo">received contact info</param>
+        [HttpPost]
+        public async Task<IActionResult> CreateInfo(ContactInfo contactInfo)
+        {
+            // send create request to api service.
+            await _personAPIService.CreateInfoAsync(contactInfo);
+
+            // Redirect back to the Person Detail page.
+            return RedirectToAction("Detail", new { id = contactInfo.PersonId });
+        }
+
+        /// <summary>
         /// Deletes requested contact info 
         /// </summary>
         /// <param name="id">The id of the requested contact info</param>

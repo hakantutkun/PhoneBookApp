@@ -1,0 +1,46 @@
+﻿@model ContactInfo
+@{
+    ViewData["Title"] = "İletişim Bilgisi Ekle";
+}
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="my-4">İletişim Bilgisi Ekle</h2>
+    </div>
+    <div class="col-md-6 text-right d-flex justify-content-end align-items-center">
+    </div>
+</div>
+
+
+<form method="post" asp-action="CreateInfo">
+    <div class="row">
+        <div class="col-md-6">
+            <div style="border-radius:10px;">
+                <div class="form-group">
+                    <label asp-for="@Model.PhoneNumber" class="mb-1">Telefon</label>
+                    <input type="text" class="form-control" asp-for="@Model.PhoneNumber" placeholder="Telefon Giriniz">
+                    <input type="hidden" asp-for="@Model.PersonId" value="@ViewData["personId"]" />
+                </div>
+                gelen id : @ViewData["personId"]
+                <div class="form-group">
+                    <label asp-for="@Model.Email" class="my-1">Email</label>
+                    <input type="email" class="form-control" asp-for="@Model.Email" placeholder="Email Giriniz">
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Location" class="my-1">Konum</label>
+                    <select class="form-select" asp-for="@Model.Location" aria-label="Default select example">
+                        <option selected>Seçiniz</option>
+                        <option value="İstanbul">İstanbul</option>
+                        <option value="Ankara">Ankara</option>
+                        <option value="İzmir">İzmir</option>
+                        <option value="Eskişehir">Eskişehir</option>
+                    </select>
+                </div>
+            </div>
+
+            <a class="btn btn-primary"> İletişim Bilgisi Ekle</a>
+            <button type="submit" class="btn btn-primary my-4">Gönder</button>
+
+        </div>
+
+    </div>
+</form>

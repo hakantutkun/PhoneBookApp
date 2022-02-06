@@ -109,6 +109,25 @@ namespace PhoneBook.UI.APIServices.Concrete
             throw new NotImplementedException();
         }
 
+
+        /// <summary>
+        /// Creates a contact info
+        /// </summary>
+        /// <param name="contactInfo">received contact info object</param>
+        /// <returns></returns>
+        public async Task CreateInfoAsync(ContactInfo contactInfo)
+        {
+            // Serialize received object to string.
+            var jsonData = JsonConvert.SerializeObject(contactInfo);
+
+            // Create a string content with json data.
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            // Post the content to the contact service.
+            await _httpClient.PostAsync("Info/", content);
+        }
+
+
         /// <summary>
         /// Deletes Contact Info
         /// </summary>
