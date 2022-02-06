@@ -62,7 +62,7 @@ namespace ContactService.API.Controllers
             }
 
             // Get requested person from database
-            var person = await _context.Persons.FirstOrDefaultAsync(m => m.Id == id);
+            var person = await _context.Persons.Include(p => p.ContactInfo).FirstOrDefaultAsync(m => m.Id == id);
 
             // Check if person was found
             if (person == null)
@@ -72,6 +72,33 @@ namespace ContactService.API.Controllers
 
             // Return the fetched person
             return Ok(person);
+        }
+
+        /// <summary>
+        /// Fetches only one person from database
+        /// </summary>
+        /// <param name="id">Requested person's id</param>
+        [HttpGet]
+        [Route("Info/{Id}")]
+        public async Task<IActionResult> GetOneInfoByIdAsync(int id)
+        {
+            // Check if received id is null
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            // Get requested person from database
+            var info = await _context.ContactInfos.FirstOrDefaultAsync(m => m.Id == id);
+
+            // Check if person was found
+            if (info == null)
+            {
+                return NotFound();
+            }
+
+            // Return the fetched person
+            return Ok(info);
         }
 
         /// <summary>
@@ -187,8 +214,43 @@ namespace ContactService.API.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Creates requested contact info.
+        /// </summary>
+        /// <param name="infoId">Requested info id.</param>
+        [HttpPost("Info/")]
+        public async Task<IActionResult> CreateInfoAsync(ContactInfo contactInfo)
+        {
+            // add contact info
+            await _context.ContactInfos.AddAsync(contactInfo);
+
+            // Save Changes
+            await _context.SaveChangesAsync();
+
+            // Return created person
+            return Created("", contactInfo);
+        }
+
+        /// <summary>
+        /// Deletes requested contact info.
+        /// </summary>
+        /// <param name="infoId">Requested info id.</param>
+        [HttpDelete("Info/{Id}")]
+        public async Task<IActionResult> DeleteInfoAsync(int Id)
+        {
+            // Get contact info
+            var info = await _context.ContactInfos.Where(i => i.Id == Id).FirstOrDefaultAsync();
+
+            // Remove info
+            _context.ContactInfos.Remove(info);
+
+            // Save db changes
+            await _context.SaveChangesAsync();
+
+            // Return
+            return NoContent();
+        }
+
         #endregion
-
-
     }
 }
