@@ -1,4 +1,5 @@
-﻿using MQTTnet.Client;
+﻿using ClosedXML.Excel;
+using MQTTnet.Client;
 using Newtonsoft.Json;
 using ReportService.Core.Models;
 using System.Text;
@@ -79,6 +80,28 @@ namespace ReportService.API
 
                     report.NumberofPhoneNumber = numberOfPhoneNumber;
                 }
+
+                ExportToExcel(report);
+            }
+        }
+
+        private void ExportToExcel(Report report)
+        {
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Report");
+
+                worksheet.Cell(1, 1).Value = "Konum";
+                worksheet.Cell(1, 2).Value = "Kişi Sayısı";
+                worksheet.Cell(1, 3).Value = "Tel No Sayısı";
+
+                worksheet.Cell(2, 1).Value = report.Location;
+                worksheet.Cell(2, 2).Value = report.NumberofPerson;
+                worksheet.Cell(2, 3).Value = report.NumberofPhoneNumber;
+
+                workbook.SaveAs("wwwroot/reports/"+ report.Id +".xlsx");
+
+
             }
         }
     }
