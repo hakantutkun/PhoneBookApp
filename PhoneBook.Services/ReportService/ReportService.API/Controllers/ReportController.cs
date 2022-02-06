@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using ReportService.Core.Models;
+using ReportService.Core.Mqtt;
 using ReportService.Infrastructure.Context;
 
 namespace ReportService.API.Controllers
@@ -19,6 +21,10 @@ namespace ReportService.API.Controllers
         /// </summary>
         private readonly ReportServiceContext _context;
 
+        private readonly MqttServer _mqttServer;
+
+        private readonly WorkerService _workerService;
+
         #endregion
 
         #region Constructor
@@ -27,10 +33,12 @@ namespace ReportService.API.Controllers
         /// Constructor
         /// </summary>
         /// <param name="context">Received context with DI</param>
-        public ReportController(ReportServiceContext context)
+        public ReportController(ReportServiceContext context, MqttServer mqttServer, WorkerService workerService)
         {
             // Inject received context
             _context = context;
+            _mqttServer = mqttServer;
+            _workerService = workerService;
         }
 
         #endregion
@@ -94,6 +102,8 @@ namespace ReportService.API.Controllers
 
                     // Save Changes
                     await _context.SaveChangesAsync();
+
+                    await _mqttServer.PublishMessageAsync(JsonConvert.SerializeObject(report));
 
                     // Return created report
                     return Created("", report);
