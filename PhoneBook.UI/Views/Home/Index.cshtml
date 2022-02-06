@@ -1,0 +1,52 @@
+﻿@model List<Person>
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="my-4">Kişiler</h2>
+    </div>
+    <div class="col-md-6 text-right d-flex justify-content-end align-items-center">
+        <a asp-action="Create" class="btn btn-primary ">Kişi Ekle</a>
+    </div>
+</div>
+
+@if(Model == null)
+{
+    <div class="alert alert-dark" role="alert">
+      Kayıtlı kullanıcı bulunamadı.
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Adı</th>
+            <th scope="col">Soyadı</th>
+            <th scope="col">Şirketi</th>
+            <th scope="col" width="20%">İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var person in Model)
+        {
+            <tr>
+                <th scope="row">1</th>
+                <td>@person.Name</td>
+                <td>@person.Surname</td>
+                <td>@person.Company</td>
+                <td class="d-flex justify-content-end align-items-center">
+                    <a class="btn btn-primary mx-2">Detaylar</a>
+                    <a asp-action="Delete" asp-route-id="@person.Id" class="btn btn-danger">Kaldır</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+}
+
