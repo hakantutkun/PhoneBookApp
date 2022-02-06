@@ -9,7 +9,8 @@ namespace ReportService.Infrastructure.Context
 
         public ReportServiceContext(DbContextOptions<ReportServiceContext> context) : base(context)
         {
-
+            // Added for timestamp logging
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

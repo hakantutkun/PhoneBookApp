@@ -84,17 +84,24 @@ namespace ReportService.API.Controllers
             // Check if model state is valid
             if (ModelState.IsValid)
             {
-                // Create a new guid
-                report.Id = Guid.NewGuid().ToString();
+                try
+                {
+                    // Create a new guid
+                    report.Id = Guid.NewGuid().ToString();
 
-                // Add report to db
-                await _context.AddAsync(report);
+                    // Add report to db
+                    await _context.Reports.AddAsync(report);
 
-                // Save Changes
-                await _context.SaveChangesAsync();
+                    // Save Changes
+                    await _context.SaveChangesAsync();
 
-                // Return created report
-                return Created("", report);
+                    // Return created report
+                    return Created("", report);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
             }
 
             // If model state is not valid, return bad request.
