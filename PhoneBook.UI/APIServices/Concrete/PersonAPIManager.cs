@@ -109,7 +109,6 @@ namespace PhoneBook.UI.APIServices.Concrete
             throw new NotImplementedException();
         }
 
-
         /// <summary>
         /// Creates a contact info
         /// </summary>
@@ -126,7 +125,6 @@ namespace PhoneBook.UI.APIServices.Concrete
             // Post the content to the contact service.
             await _httpClient.PostAsync("Info/", content);
         }
-
 
         /// <summary>
         /// Deletes Contact Info
