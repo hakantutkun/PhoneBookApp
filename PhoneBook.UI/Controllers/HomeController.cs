@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhoneBook.UI.APIServices.Abstract;
+using PhoneBook.UI.Models;
 
 namespace PhoneBook.UI.Controllers
 {
@@ -34,6 +35,29 @@ namespace PhoneBook.UI.Controllers
         public async Task<IActionResult> Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Person person)
+        {
+            if (person == null)
+                return View();
+
+            if(!ModelState.IsValid)
+            {
+                return View(person);
+            }
+
+            person.Id = Guid.NewGuid().ToString();
+
+            foreach (var contactInfo in person.ContactInfo)
+            {
+                contactInfo.PersonId = person.Id;
+            }
+
+            await _personAPIService.CreateAsync(person);
+
+            return RedirectToAction("Index");
         }
 
     }

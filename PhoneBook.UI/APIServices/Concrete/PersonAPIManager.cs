@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PhoneBook.UI.APIServices.Abstract;
 using PhoneBook.UI.Models;
+using System.Text;
 
 namespace PhoneBook.UI.APIServices.Concrete
 {
@@ -25,9 +26,12 @@ namespace PhoneBook.UI.APIServices.Concrete
             return null;
         }
 
-        public Task CreateAsync(Person person)
+        public async Task CreateAsync(Person person)
         {
-            throw new NotImplementedException();
+            var jsonData = JsonConvert.SerializeObject(person);
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            await _httpClient.PostAsync("", content);
         }
 
         public async Task DeleteAsync(string id)
