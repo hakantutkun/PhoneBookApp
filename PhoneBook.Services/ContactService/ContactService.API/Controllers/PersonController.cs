@@ -251,6 +251,30 @@ namespace ContactService.API.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Gets number of person according to location information
+        /// </summary>
+        /// <param name="location">Received Location</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Person/{location}")]
+        public async Task<int> GetNumberOfPersonByLocation(string location)
+        {
+            return _context.ContactInfos.ToList().DistinctBy(i =>i.PersonId).Count(i => i.Location == location);
+        }
+
+        [HttpGet]
+        [Route("Phone/{location}")]
+        /// <summary>
+        /// Gets number of phone numbers according to location information
+        /// </summary>
+        /// <param name="location">Received Location</param>
+        /// <returns></returns>
+        public async Task<int> GetNumberOfPhoneNumbersByLocation(string location)
+        {
+            return _context.ContactInfos.Count(i => i.Location == location);
+        }
+
         #endregion
     }
 }
