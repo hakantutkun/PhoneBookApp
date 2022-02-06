@@ -13,5 +13,9 @@ namespace PhoneBook.UI.APIServices.Abstract
         Task UpdateAsync(Person person);
 
         Task DeleteAsync(string id);
+
+        Task DeleteInfoAsync(int id);
+
+        Task<ContactInfo> GetOneInfoByIdAsync(int id);
     }
 }

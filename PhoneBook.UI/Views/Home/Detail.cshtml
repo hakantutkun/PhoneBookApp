@@ -1,0 +1,60 @@
+﻿@model Person
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="my-4">Kişi Detay</h2>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="my-4">İletişim Bilgileri</h2>
+            </div>
+            <div class="col-md-6 text-right d-flex justify-content-end align-items-center">
+                <a class="btn btn-warning">Ekle</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model == null)
+{
+    <h1> Detay bulunamadı!</h1>
+}
+else
+{
+
+    <div class="row">
+
+        <div class=col-md-6>
+            <div class="card">
+                <div class="card-header">
+                    Bilgiler
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Name @Model.Surname</h5>
+                    <p class="card-text">@Model.Company</p>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">Kaldır</a>
+                </div>
+            </div>
+        </div>
+        <div class=col-md-6>
+            @if (Model.ContactInfo != null)
+            {
+                @foreach (var item in @Model.ContactInfo)
+                {
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            İletişim Bilgisi
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><strong>Telefon : </strong>@item.PhoneNumber</p>
+                            <p class="card-text"><strong>E-Mail : </strong>@item.Email</p>
+                            <p class="card-text"><strong>Konum : </strong>@item.Location</p>
+                            <a asp-action="DeleteInfo" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Kaldır</a>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+    </div>
+}

@@ -40,7 +40,7 @@ else
                 <td>@person.Surname</td>
                 <td>@person.Company</td>
                 <td class="d-flex justify-content-end align-items-center">
-                    <a class="btn btn-primary mx-2">Detaylar</a>
+                    <a asp-controller="Home" asp-action="Detail" asp-route-id="@person.Id"  class="btn btn-primary mx-2">Detaylar</a>
                     <a asp-action="Delete" asp-route-id="@person.Id" class="btn btn-danger">Kaldır</a>
                 </td>
             </tr>
