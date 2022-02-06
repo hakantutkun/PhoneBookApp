@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PhoneBook.UI.APIServices.Abstract;
 using PhoneBook.UI.Models;
+using System.Text;
 
 namespace PhoneBook.UI.APIServices.Concrete
 {
@@ -51,21 +52,53 @@ namespace PhoneBook.UI.APIServices.Concrete
             return null;
         }
 
-        public Task CreateAsync(Report report)
+        /// <summary>
+        /// Creates a new report
+        /// </summary>
+        /// <param name="report">Received report object</param>
+        /// <returns></returns>
+        public async Task CreateAsync(Report report)
         {
-            throw new NotImplementedException();
+            // Serialize received object to string.
+            var jsonData = JsonConvert.SerializeObject(report);
+
+            // Create a string content with json data.
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            // Post the content to the contact service.
+            await _httpClient.PostAsync("", content);
         }
 
-        public Task DeleteAsync(string id)
+        /// <summary>
+        /// Deletes a report
+        /// </summary>
+        /// <param name="id">The id of the report that will be deleted.</param>
+        /// <returns></returns>
+        public async Task DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            // Send delete request to contact service.
+            await _httpClient.DeleteAsync(id);
         }
 
-        public Task<Report> GetOneByIdAsync(string id)
+        /// <summary>
+        /// Gets the requested report.
+        /// </summary>
+        /// <param name="id">The id of the requested report.</param>
+        /// <returns></returns>
+        public async Task<Report> GetOneByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            // Send request with id.
+            var responseMessage = await _httpClient.GetAsync(id);
+
+            // Deserialize received string to the person object and return it.
+            return JsonConvert.DeserializeObject<Report>(await responseMessage.Content.ReadAsStringAsync());
         }
 
+        /// <summary>
+        /// Updates the requested report.
+        /// </summary>
+        /// <param name="report">Requested report.</param>
+        /// <returns></returns>
         public Task UpdateAsync(Report report)
         {
             throw new NotImplementedException();

@@ -1,0 +1,31 @@
+﻿@model Report
+@{
+    ViewData["Title"] = "Rapor Oluştur";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="my-4">Rapor Oluştur</h2>
+    </div>
+    <div class="col-md-6 text-right d-flex justify-content-end align-items-center">
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" asp-action="Create">
+            <div class="form-group">
+                <label asp-for="@Model.Location" class="my-1">Konum</label>
+                <select class="form-select" asp-for="@Model.Location" aria-label="Default select example">
+                    <option selected>Seçiniz</option>
+                    <option value="İstanbul">İstanbul</option>
+                    <option value="Ankara">Ankara</option>
+                    <option value="İzmir">İzmir</option>
+                    <option value="Eskişehir">Eskişehir</option>
+                </select>
+                 <button type="submit" class="btn btn-primary my-4">Oluştur</button>
+            </div>
+        </form>
+    </div>
+</div>
