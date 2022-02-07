@@ -1,1 +1,17 @@
 .vs
+PhoneBook.UI/bin
+PhoneBook.UI/obj
+PhoneBook.APIGateway/bin
+PhoneBook.APIGateway/obj
+PhoneBook.Services/ContactService/ContactService.API/bin
+PhoneBook.Services/ContactService/ContactService.API/obj
+PhoneBook.Services/ContactService/ContactService.Core/bin
+PhoneBook.Services/ContactService/ContactService.Core/obj
+PhoneBook.Services/ContactService/ContactService.Infrastructure/bin
+PhoneBook.Services/ContactService/ContactService.Infrastructure/obj
+PhoneBook.Services/ReportService/ReportService.API/bin
+PhoneBook.Services/ReportService/ReportService.API/obj
+PhoneBook.Services/ReportService/ReportService.Core/bin
+PhoneBook.Services/ReportService/ReportService.Core/obj
+PhoneBook.Services/ReportService/ReportService.Infrastructure/bin
+PhoneBook.Services/ReportService/ReportService.Infrastructure/obj
