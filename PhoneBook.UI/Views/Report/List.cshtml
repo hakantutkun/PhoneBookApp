@@ -50,7 +50,11 @@ else
                     <td>@report.Location</td>
                     <td class="d-flex justify-content-end align-items-center">
                         <a asp-controller="Report" asp-action="Detail" asp-route-id="@report.Id" class="btn btn-primary btn-sm mx-2">Detaylar</a>
-                        <a asp-controller="Report" asp-action="Delete" asp-route-id="@report.Id" class="btn btn-sm btn-danger">Kaldır</a>
+                        @if (@report.ReportState.ToString() == "Completed")
+                        {
+                            <a asp-controller="Report" asp-action="Delete" asp-route-id="@report.Id" class="btn btn-sm btn-danger">Kaldır</a>
+                        }
+                        
                     </td>
                 </tr>
             }

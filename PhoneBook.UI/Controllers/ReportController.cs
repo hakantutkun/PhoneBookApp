@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhoneBook.UI.APIServices.Abstract;
 using PhoneBook.UI.Models;
+using System.Net;
 
 namespace PhoneBook.UI.Controllers
 {
@@ -35,7 +36,7 @@ namespace PhoneBook.UI.Controllers
         /// Default Index Action
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> List()
         {
             try
             {
@@ -81,7 +82,7 @@ namespace PhoneBook.UI.Controllers
             await _reportAPIService.CreateAsync(report);
 
             // Redirect back to the index page.
-            return RedirectToAction("Index","Report");
+            return RedirectToAction("List","Report");
         }
 
         /// <summary>
@@ -108,7 +109,7 @@ namespace PhoneBook.UI.Controllers
             await _reportAPIService.DeleteAsync(id);
 
             // Redirect back to the index page.
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
     }
 }
