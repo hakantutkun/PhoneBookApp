@@ -34,5 +34,10 @@
         /// Number of phone numbers that recorded to selected location.
         /// </summary>
         public int? NumberofPhoneNumber { get; set; }
+
+        /// <summary>
+        /// File Path of the report
+        /// </summary>
+        public string? FilePath { get; set; }
     }
 }

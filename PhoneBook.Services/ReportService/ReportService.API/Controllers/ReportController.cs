@@ -121,17 +121,10 @@ namespace ReportService.API.Controllers
         /// <summary>
         /// Updates requested report.
         /// </summary>
-        /// <param name="id">Uid of report that will be updated</param>
         /// <param name="report">Changed report object</param>
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(string id, [FromBody] Report report)
+        [HttpPut]
+        public async Task<IActionResult> UpdateAsync([FromBody] Report report)
         {
-            // Check if received id is the same with report's id
-            if (id != report.Id)
-            {
-                return NotFound();
-            }
-
             // Check if model state is valid
             if (ModelState.IsValid)
             {

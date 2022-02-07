@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ReportService.Infrastructure.Context;
@@ -11,9 +12,10 @@ using ReportService.Infrastructure.Context;
 namespace ReportService.Infrastructure.Migrations
 {
     [DbContext(typeof(ReportServiceContext))]
-    partial class ReportServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20220207102118_FilePathAdded")]
+    partial class FilePathAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -31,6 +31,10 @@ namespace PhoneBook.UI.Controllers
 
         #endregion
 
+        /// <summary>
+        /// Default Index Action
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             try
@@ -48,24 +52,53 @@ namespace PhoneBook.UI.Controllers
             }
         }
 
+        /// <summary>
+        /// Create Get Method
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Create()
         {
             return View();
         }
 
+        /// <summary>
+        /// Creates new report
+        /// </summary>
+        /// <param name="report">Received report object.</param>
         [HttpPost]
         public async Task<IActionResult> Create(Report report)
         {
+            // Set the id of the report
             report.Id = Guid.NewGuid().ToString();
 
+            // Set Creation time
             report.CreationTime = DateTime.Now;
 
+            // Set report state as preparing.
             report.ReportState = ReportState.Preparing;
 
+            // Send create request to report service.
             await _reportAPIService.CreateAsync(report);
 
             // Redirect back to the index page.
             return RedirectToAction("Index","Report");
+        }
+
+        public async Task<IActionResult> Detail(string id)
+        {
+            // Get all from api service.
+            var report = await _reportAPIService.GetOneByIdAsync(id);
+
+            // Return report.
+            return View(report);
+        }
+
+        public async Task<IActionResult> ExcelDownload(string id)
+        {
+            // Get file from API service
+            var result = await _reportAPIService.DownloadFileAsync(id);
+
+            return RedirectToAction("Index", "Report");
         }
     }
 }
