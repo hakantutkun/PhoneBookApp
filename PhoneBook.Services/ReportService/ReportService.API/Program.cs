@@ -13,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpClient<WorkerService>();
+builder.Services.AddHttpClient<WorkerService>();
 
 builder.Services.AddDbContext<ReportServiceContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));

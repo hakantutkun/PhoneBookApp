@@ -33,6 +33,8 @@ namespace PhoneBook.UI.APIServices.Concrete
 
         #endregion
 
+        #region Methods
+
         /// <summary>
         /// Gets all reports from database.
         /// </summary>
@@ -103,5 +105,7 @@ namespace PhoneBook.UI.APIServices.Concrete
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }
