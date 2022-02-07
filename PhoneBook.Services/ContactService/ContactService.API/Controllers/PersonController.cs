@@ -1,4 +1,4 @@
-﻿using ContactService.Infrastructure.Context;
+﻿using ContactService.API.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PersonService.Core.Models;

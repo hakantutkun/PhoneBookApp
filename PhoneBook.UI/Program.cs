@@ -9,6 +9,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpClient<IPersonAPIService, PersonAPIManager>();
 builder.Services.AddHttpClient<IReportAPIService, ReportAPIManager>();
 
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

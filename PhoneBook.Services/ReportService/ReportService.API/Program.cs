@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ReportService.API;
+using ReportService.API.Context;
 using ReportService.Core.Mqtt;
-using ReportService.Infrastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +25,8 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 builder.Services.AddSingleton<MqttServer>();
 builder.Services.AddSingleton<MqttClient>();
 builder.Services.AddSingleton<WorkerService>();
+
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 var app = builder.Build();
 

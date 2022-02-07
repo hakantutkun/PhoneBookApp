@@ -92,13 +92,5 @@ namespace PhoneBook.UI.Controllers
             // Return report.
             return View(report);
         }
-
-        public async Task<IActionResult> ExcelDownload(string id)
-        {
-            // Get file from API service
-            var result = await _reportAPIService.DownloadFileAsync(id);
-
-            return RedirectToAction("Index", "Report");
-        }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using ReportService.API.Context;
 using ReportService.Core.Models;
 using ReportService.Core.Mqtt;
-using ReportService.Infrastructure.Context;
 
 namespace ReportService.API.Controllers
 {
@@ -21,8 +21,12 @@ namespace ReportService.API.Controllers
         /// </summary>
         private readonly ReportServiceContext _context;
 
+        /// <summary>
+        /// MqttServer object
+        /// </summary>
         private readonly MqttServer _mqttServer;
 
+        // Worker Service Object
         private readonly WorkerService _workerService;
 
         #endregion
