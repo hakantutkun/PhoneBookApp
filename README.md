@@ -1,5 +1,12 @@
 # Rehber Uygulaması
 
+
+## Kullanılan Teknolojiler
+ 
+ * ORM :  EntityFramework Core
+ * Database : PostgreSQL 14
+ * Mqtt Broker : MqttNet Library
+
 ## Nasıl Çalıştırılır ?
 
 - Veritabanlarının Oluşturulması
