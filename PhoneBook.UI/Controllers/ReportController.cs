@@ -84,6 +84,11 @@ namespace PhoneBook.UI.Controllers
             return RedirectToAction("Index","Report");
         }
 
+        /// <summary>
+        /// Report Detail Action
+        /// </summary>
+        /// <param name="id">The id of the requested report</param>
+        /// <returns></returns>
         public async Task<IActionResult> Detail(string id)
         {
             // Get all from api service.
@@ -91,6 +96,19 @@ namespace PhoneBook.UI.Controllers
 
             // Return report.
             return View(report);
+        }
+
+        /// <summary>
+        /// Deletes requested person
+        /// </summary>
+        /// <param name="id">requested person id</param>
+        public async Task<IActionResult> Delete(string id)
+        {
+            // Send delete request to api service. 
+            await _reportAPIService.DeleteAsync(id);
+
+            // Redirect back to the index page.
+            return RedirectToAction("Index");
         }
     }
 }
