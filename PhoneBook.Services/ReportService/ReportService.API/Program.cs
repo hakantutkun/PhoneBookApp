@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ReportService.API;
+using ReportService.API.Context;
 using ReportService.Core.Mqtt;
-using ReportService.Infrastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
