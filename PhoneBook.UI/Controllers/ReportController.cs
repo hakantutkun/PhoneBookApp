@@ -83,5 +83,22 @@ namespace PhoneBook.UI.Controllers
             // Redirect back to the index page.
             return RedirectToAction("Index","Report");
         }
+
+        public async Task<IActionResult> Detail(string id)
+        {
+            // Get all from api service.
+            var report = await _reportAPIService.GetOneByIdAsync(id);
+
+            // Return report.
+            return View(report);
+        }
+
+        public async Task<IActionResult> ExcelDownload(string id)
+        {
+            // Get file from API service
+            var result = await _reportAPIService.DownloadFileAsync(id);
+
+            return RedirectToAction("Index", "Report");
+        }
     }
 }
