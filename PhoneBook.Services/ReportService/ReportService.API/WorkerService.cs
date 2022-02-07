@@ -32,6 +32,11 @@ namespace ReportService.API
         /// </summary>
         private readonly HttpClient _httpReportClient;
 
+        /// <summary>
+        /// Configuration
+        /// </summary>
+        private readonly IConfiguration _configuration;
+
         #endregion
 
         #region Constructor
@@ -40,7 +45,7 @@ namespace ReportService.API
         /// Constructor
         /// </summary>
         /// <param name="mqttClient">MqttClient singleton object</param>
-        public WorkerService(MqttClient mqttClient, HttpClient httpContactClient, HttpClient httpReportClient)
+        public WorkerService(MqttClient mqttClient, HttpClient httpContactClient, HttpClient httpReportClient, IConfiguration configuration)
         {
             // Inject MqttClient
             _mqttClient = mqttClient;
@@ -51,11 +56,20 @@ namespace ReportService.API
             // Inject HttpClient
             _httpReportClient = httpReportClient;
 
+            // Inject Configuration
+            _configuration = configuration;
+
+            // Get endpoint from appsettings
+            var contactEndpoint = _configuration.GetValue<string>("ContactEndPoint");
+
             // Set base address of the contact client.
-            _httpContactClient.BaseAddress = new Uri("http://localhost:5038/Person/");
+            _httpContactClient.BaseAddress = new Uri(contactEndpoint);
+
+            // Get endpoint from appsettings
+            var reportEndpoint = _configuration.GetValue<string>("ReportEndPoint");
 
             // set base address of the report client.
-            _httpReportClient.BaseAddress = new Uri("http://localhost:5088/Report/");
+            _httpReportClient.BaseAddress = new Uri(reportEndpoint);
 
             // When message arrived from server
             _mqttClient.mqttClient.UseApplicationMessageReceivedHandler(async e =>

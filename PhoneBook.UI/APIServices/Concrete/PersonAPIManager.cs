@@ -17,6 +17,11 @@ namespace PhoneBook.UI.APIServices.Concrete
         /// </summary>
         private readonly HttpClient _httpClient;
 
+        /// <summary>
+        /// Configuration
+        /// </summary>
+        private readonly IConfiguration _configuration;
+
         #endregion
 
         #region Constructor
@@ -25,13 +30,19 @@ namespace PhoneBook.UI.APIServices.Concrete
         /// Constructor
         /// </summary>
         /// <param name="httpClient">HttpClient DI object</param>
-        public PersonAPIManager(HttpClient httpClient)
+        public PersonAPIManager(HttpClient httpClient, IConfiguration configuration)
         {
             // Inject httpclient.
             _httpClient = httpClient;
 
+            // Inject configuration
+            _configuration = configuration;
+
+            // Get endpoint from appsettings
+            var endpoint = _configuration.GetValue<string>("ContactEndPoint");
+
             // Set base address of the client.
-            _httpClient.BaseAddress = new Uri("http://localhost:5038/Person/");
+            _httpClient.BaseAddress = new Uri(endpoint);
         }
 
         #endregion

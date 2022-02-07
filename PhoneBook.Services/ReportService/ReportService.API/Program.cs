@@ -26,6 +26,8 @@ builder.Services.AddSingleton<MqttServer>();
 builder.Services.AddSingleton<MqttClient>();
 builder.Services.AddSingleton<WorkerService>();
 
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
