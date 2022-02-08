@@ -94,7 +94,7 @@ namespace ReportService.API.Controllers
         public async Task<IActionResult> CreateAsync([FromBody] Report report)
         {
             // Check if model state is valid
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && report.Location != null)
             {
                 try
                 {
