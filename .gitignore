@@ -15,3 +15,7 @@ PhoneBook.Services/ReportService/ReportService.Core/bin
 PhoneBook.Services/ReportService/ReportService.Core/obj
 PhoneBook.Services/ReportService/ReportService.Infrastructure/bin
 PhoneBook.Services/ReportService/ReportService.Infrastructure/obj
+PhoneBook.UnitTests/ContactService.Tests/bin
+PhoneBook.UnitTests/ContactService.Tests/obj
+PhoneBook.UnitTests/ReportService.Tests/bin
+PhoneBook.UnitTests/ReportService.Tests/obj

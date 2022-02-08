@@ -146,33 +146,27 @@ namespace ContactService.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(string id, [FromBody] Person person)
         {
-            // Check if received id is the same with person's id
-            if (id != person.Id)
-            {
-                return NotFound();
-            }
-
             // Check if model state is valid
             if (ModelState.IsValid)
             {
-                try
-                {
-                    // Update requested person
-                    _context.Update(person);
+                var personToBeUpdated = await _context.Persons.FindAsync(id);
 
-                    // Save db changes
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
+                // Check if received id is the same with person's id
+                if (personToBeUpdated == null)
                 {
-                    // Check if person exist in database
-                    var p = await _context.Persons.FindAsync(person.Id);
-
-                    if (p == null)
-                    {
-                        return NotFound();
-                    }
+                    return NotFound();
                 }
+
+                personToBeUpdated.Name = person.Name;
+                personToBeUpdated.Surname = person.Surname;
+                personToBeUpdated.Company = person.Company;
+                personToBeUpdated.ContactInfo = person.ContactInfo;
+
+                // Update requested person
+                _context.Update(personToBeUpdated);
+
+                // Save db changes
+                await _context.SaveChangesAsync();
 
                 // If updated
                 return NoContent();
